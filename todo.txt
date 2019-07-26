@@ -1,0 +1,6 @@
+*Byt namn
+*Städa, kommentera etc.
+-PHP docs
+*ändra till prod mode
+Github
+Sätt upp på egen server
