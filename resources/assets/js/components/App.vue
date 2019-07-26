@@ -1,7 +1,8 @@
 /**
 * App.vue
 * Main file for the table. The user can create, read, update and delete tasks. 
-*    
+*
+* Author Björn Berggren   
 */
 
 <template>
@@ -130,6 +131,7 @@ export default {
     remove(id) {
       this.isLoading = true;
       this.output.message = "";
+
       axios
         .delete(`/api/tasks/${id}`)
         .then(() => {

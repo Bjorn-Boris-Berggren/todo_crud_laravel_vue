@@ -1,7 +1,8 @@
 /**
 * Task.vue
 * This represents each task in the table. The user can remove, edit and mark tasks 
-*    
+* 
+* Author Björn Berggren    
 */
 <template>
   <tr>

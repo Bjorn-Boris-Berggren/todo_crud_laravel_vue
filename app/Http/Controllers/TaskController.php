@@ -35,6 +35,11 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        // Validates user-input
+        $request->validate([
+            'title' => 'required',
+        ]);
+
         $task = new Task();
         $task->title = $request->title;
         $task->done = false;
@@ -50,6 +55,7 @@ class TaskController extends Controller
      */
     public function destroy(int $id)
     {
+
         Task::destroy($id);
         return response(null, Response::HTTP_NO_CONTENT);
     }
@@ -61,7 +67,7 @@ class TaskController extends Controller
      */
     public function update(Request $request)
     {
-
+        // Validates user-input
         $request->validate([
             'id' => 'required|integer',
             'title' => 'required',
