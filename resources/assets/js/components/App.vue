@@ -8,7 +8,7 @@
 <template>
   <div class="app-component">
     <loading :active.sync="isLoading"></loading>
-    <p class="text-danger">{{output.message}}</p>
+    <p class="text-danger">{{txtLabelOutputToUser.message}}</p>
 
     <table class="table">
       <thead>
@@ -31,7 +31,7 @@
 
         <tr>
           <td>
-            <input v-model="task.title" type="text" id="task" class="form-control" />
+            <input v-model="taskAdd.title" type="text" id="task" class="form-control" />
           </td>
 
           <td>
@@ -59,89 +59,99 @@ export default {
     return {
       isLoading: false,
       tasks: [],
-      task: { title: "", done: "", id: false },
-      tempTask: { title: "", done: "", id: false },
-      messages: { error: "No empty fields are allowed" },
-      output: { message: "" },
+      taskAdd: { title: "", done: "", id: false },
+      taskEdit: { title: "", done: "", id: false },
+      predefinedMessagesToUser: {
+        errorAdd:
+          "The text-field cannot be empty while adding tasks, please add a task name",
+        errorEdit:
+          "The task text-field cannot be empty while editing the task, please add a task name"
+      },
+      txtLabelOutputToUser: { message: "" },
       csrf: ["csrf", "id"]
     };
   },
   methods: {
     // Gets all the tasks avaible from TaskController
     getTasks() {
-      window.axios.get("/api/tasks").then(({ data }) => {
-        data.forEach(task => {
-          this.tasks.push(task);
+      window.axios
+        .get("/api/tasks")
+        .then(({ data }) => {
+          data.forEach(task => {
+            this.tasks.push(task);
+          });
+        })
+        .catch(data => {
+          this.txtLabelOutputToUser.message = data.message;
         });
-      });
     },
     // Posts the new task to the TaskController
     store() {
-      if (this.task.title.trim()) {
+      if (this.taskAdd.title.trim()) {
         this.isLoading = true;
-        this.output.message = "";
+        this.txtLabelOutputToUser.message = "";
         axios
-          .post("/api/tasks", this.task)
-          .then(newTask => {
-            this.tasks.push(newTask.data);
-            this.task.title = "";
+          .post("/api/tasks", this.taskAdd)
+          .then(createdTaskResponse => {
+            this.tasks.push(createdTaskResponse.data);
+            this.taskAdd.title = "";
             this.isLoading = false;
           })
-          .catch(editedTask => {
+          .catch(createdTaskResponse => {
             this.isLoading = false;
-            this.output.message = editedTask.message;
+            this.txtLabelOutputToUser.message = createdTaskResponse.message;
           });
       } else {
-        this.output.message = this.messages.error;
+        this.txtLabelOutputToUser.message = this.predefinedMessagesToUser.errorAdd;
         this.isLoading = false;
       }
     },
     // Patchs the edited task to the TaskController
     edit(id, title, done) {
       this.isLoading = true;
-      this.output.message = "";
-      this.tempTask.id = id;
-      this.tempTask.done = done;
-      this.tempTask.title = title;
+      this.txtLabelOutputToUser.message = "";
+      this.taskEdit.id = id;
+      this.taskEdit.done = done;
+      this.taskEdit.title = title;
 
-      if (this.tempTask.title.trim()) {
+      if (this.taskEdit.title.trim()) {
         axios
-          .patch(`/api/tasks/${id}`, this.tempTask)
-          .then(editedTask => {
+          .patch(`/api/tasks/${id}`, this.taskEdit)
+          .then(editedTaskResponse => {
             let index = this.tasks.findIndex(task => task.id === id);
-            this.tasks[index].title = editedTask.data.title;
-            this.tempTask.title = "";
-            this.tempTask.id = 0;
-            this.tempTask.done = false;
+            this.tasks[index].title = editedTaskResponse.data.title;
+            this.taskEdit.title = "";
+            this.taskEdit.id = 0;
+            this.taskEdit.done = false;
             this.isLoading = false;
           })
-          .catch(editedTask => {
+          .catch(editedTaskResponse => {
             this.isLoading = false;
             // Receives error code 404 if fails
-            this.output.message = editedTask.message;
+            this.txtLabelOutputToUser.message = editedTaskResponse.message;
           });
       } else {
         this.tasks = [];
         this.getTasks();
-        this.output.message = this.messages.error;
+        this.txtLabelOutputToUser.message = this.predefinedMessagesToUser.errorEdit;
         this.isLoading = false;
       }
     },
     // Delete the task to TaskController that will be removed
     remove(id) {
       this.isLoading = true;
-      this.output.message = "";
+      this.txtLabelOutputToUser.message = "";
 
       axios
         .delete(`/api/tasks/${id}`)
-        .then(() => {
+        .then(deletedTaskResponse => {
           let index = this.tasks.findIndex(task => task.id === id);
           this.tasks.splice(index, 1);
           this.isLoading = false;
         })
-        .catch(editedTask => {
+        .catch(deletedTaskResponse => {
           this.isLoading = false;
-          this.output.message = editedTask.message;
+          this.txtLabelOutputToUser.message = deletedTaskResponse.message;
         });
     }
   },

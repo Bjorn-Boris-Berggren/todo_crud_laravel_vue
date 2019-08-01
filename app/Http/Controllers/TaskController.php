@@ -39,7 +39,6 @@ class TaskController extends Controller
         $request->validate([
             'title' => 'required',
         ]);
-
         $task = new Task();
         $task->title = $request->title;
         $task->done = false;
@@ -55,7 +54,8 @@ class TaskController extends Controller
      */
     public function destroy(int $id)
     {
-
+        // Sends 404 if it is not found
+        Task::findOrFail($id);
         Task::destroy($id);
         return response(null, Response::HTTP_NO_CONTENT);
     }
@@ -74,7 +74,7 @@ class TaskController extends Controller
             'done' => 'required|boolean',
         ]);
 
-        // Sends 404 if fails
+        // Sends 404 if it is not found
         $task = Task::findOrFail($request->id);
         $task->title = $request->title;
         $task->done = $request->done;
