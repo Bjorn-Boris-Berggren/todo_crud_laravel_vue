@@ -12,4 +12,4 @@
  */
 
 Route::get('/', 'HomeController@showMainPage');
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@showMainPage')->name('home');
