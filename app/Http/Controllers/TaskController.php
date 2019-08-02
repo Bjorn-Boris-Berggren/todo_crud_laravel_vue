@@ -9,7 +9,6 @@ namespace App\Http\Controllers;
  */
 
 use App\Model\Task;
-use Faker\Generator;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
