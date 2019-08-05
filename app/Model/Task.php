@@ -3,20 +3,24 @@
 namespace App\Model;
 
 /**
- * Task.php 
+ * Task.php
  * The model that manages the tasks for the database.
  *
- * @author Björn Berggren 
+ * @author Björn Berggren
  */
 
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    /** 
-     * @var $fillable['title'] string 
-     * @var $fillable['done'] string 
-     * @var $fillable['created_at'] string 
+    /**
+     * @var $fillable['title'] string
+     * @var $fillable['done'] string
+     * @var $fillable['created_at'] string
      * */
-    protected $fillable = ['title', 'done', 'created_at'];
+    protected $fillable = [
+        'title',
+        'done',
+        'created_at',
+    ];
 }
