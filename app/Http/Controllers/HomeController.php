@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 /**
  * The controller that displayes the first page.
  *
- * @author Björn Berggren 
+ * @author Björn Berggren
  */
 
 class HomeController extends Controller
 {
+
+
     /**
      * Create a new HomeController instance.
      *
@@ -20,6 +22,7 @@ class HomeController extends Controller
 
     /**
      * Show the application.
+     *
      * @return \Illuminate\Http\Response
      */
     public function showMainPage()

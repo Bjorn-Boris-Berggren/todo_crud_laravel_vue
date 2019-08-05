@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 /**
  * The controller that manages the tasks.
  *
- * @author Björn Berggren 
+ * @author Björn Berggren
  */
 
 use App\Model\Task;
@@ -14,11 +14,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TaskController extends Controller
 {
+
+
     public function __construct()
     { }
 
     /**
-     * Display a listing of the task.   *
+     * Display a listing of the task.  
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -26,18 +29,21 @@ class TaskController extends Controller
         return response(Task::all()->jsonSerialize(), Response::HTTP_OK);
     }
 
+
     /**
      * Store a newly created task in the database.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         // Validates user-input
-        $request->validate([
-            'title' => 'required',
-        ]);
+        $request->validate(
+            [
+                'title' => 'required',
+            ]
+        );
         $task = new Task();
         $task->title = $request->title;
         $task->done = false;
@@ -48,7 +54,7 @@ class TaskController extends Controller
     /**
      * Remove specified task from the database.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
@@ -61,17 +67,19 @@ class TaskController extends Controller
     /**
      * Will edit the task.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
         // Validates user-input
-        $request->validate([
-            'id' => 'required|integer',
-            'title' => 'required',
-            'done' => 'required|boolean',
-        ]);
+        $request->validate(
+            [
+                'id' => 'required|integer',
+                'title' => 'required',
+                'done' => 'required|boolean',
+            ]
+        );
 
         // Sends 404 if it is not found
         $task = Task::findOrFail($request->id);
