@@ -1,6 +1,6 @@
 /**
 * App.vue
-* Main file for the table. The user can create, read, update and delete tasks. 
+* Main file for the form on the client-side. The user can create, read, update and delete tasks. 
 *
 * Author Björn Berggren   
 */
@@ -56,7 +56,9 @@ import Error from "./vue-error-handler.js";
 import "vue-loading-overlay/dist/vue-loading.min.css";
 export default {
   data() {
+    // The objects and arrays used by this form
     return {
+      // Turns the loading-icon on and off
       isLoading: false,
       tasks: [],
       taskAdd: { title: "", done: "", id: false },
