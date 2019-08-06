@@ -4,7 +4,7 @@ This web application creates, reads, updates and deletes tasks.
 
 ## Getting Started
 
-1. This requires a server with Laravel, php and mySQL.
+1. This requires a server with Laravel, PHP and MySQL.
 2. Set the root directory on the server to 'public' .
 3. AutoIndex should be turned off.
 6. To config the app to use your database, edit the .env file (not included) on the project's root directory. Just change the user,psw,dbname and dbhost.
