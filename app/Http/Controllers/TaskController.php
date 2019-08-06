@@ -57,7 +57,7 @@ class TaskController extends Controller
      */
     public function destroy(int $id)
     {
-        // Sends 404 if it is not found
+        // Sends 404 if the task is not found
         Task::findOrFail($id);
         Task::destroy($id);
         return response(null, Response::HTTP_NO_CONTENT);
@@ -79,7 +79,7 @@ class TaskController extends Controller
             ]
         );
 
-        // Sends 404 if it is not found
+        // Sends 404 if the task is not found
         $task = Task::findOrFail($request->id);
         $task->title = $request->title;
         $task->done = $request->done;
