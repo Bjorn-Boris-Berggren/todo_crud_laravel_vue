@@ -60,15 +60,20 @@ export default {
     return {
       // Turns the loading-icon on and off
       isLoading: false,
+      // Will Contain all the tasks
       tasks: [],
+      // Will contain the newly added task
       taskAdd: { title: "", done: "", id: false },
+      // Will contain the newly deited task
       taskEdit: { title: "", done: "", id: false },
+      // Contains the client-side messages to user
       predefinedMessagesToUser: {
         errorAdd:
           "The text-field cannot be empty while adding tasks, please add a task name",
         errorEdit:
           "The task text-field cannot be empty while editing the task, please add a task name"
       },
+      // Changes here will be automatically displayed for the user
       txtLabelOutputToUser: { message: "" },
       csrf: ["csrf", "id"]
     };
