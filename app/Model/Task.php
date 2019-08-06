@@ -23,4 +23,5 @@ class Task extends Model
         'done',
         'created_at',
     ];
+
 }

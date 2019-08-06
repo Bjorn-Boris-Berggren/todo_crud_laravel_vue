@@ -15,12 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 class TaskController extends Controller
 {
 
-
     public function __construct()
-    { }
+    {}
 
     /**
-     * Display a listing of the task.  
+     * Display a listing of the task.
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,7 +27,6 @@ class TaskController extends Controller
     {
         return response(Task::all()->jsonSerialize(), Response::HTTP_OK);
     }
-
 
     /**
      * Store a newly created task in the database.
@@ -48,7 +46,7 @@ class TaskController extends Controller
         $task->title = $request->title;
         $task->done = false;
         $task->save();
-        return response($task->jsonSerialize(),  Response::HTTP_CREATED);
+        return response($task->jsonSerialize(), Response::HTTP_CREATED);
     }
 
     /**

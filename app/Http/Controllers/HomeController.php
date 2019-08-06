@@ -11,14 +11,13 @@ namespace App\Http\Controllers;
 class HomeController extends Controller
 {
 
-
     /**
      * Create a new HomeController instance.
      *
      * @return HomeController
      */
     public function __construct()
-    { }
+    {}
 
     /**
      * Show the application.
