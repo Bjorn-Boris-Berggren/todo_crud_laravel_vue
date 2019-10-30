@@ -17,7 +17,7 @@
         "jsdoc": "^3.6.3",
         "jsdoc-vuejs": "^3.0.0",
         "laravel-mix": "^2.0",
-        "lodash": "^4.17.4",
+        "lodash": "^4.17.13",
         "popper.js": "^1.12",
         "vue": "^2.5.7"
     },
